@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello-job
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      parallelism: 1
+      template:
+        spec:
+          containers:
+          - name: hello-job-container
+            image: europe-north1-docker.pkg.dev/YOUR_PROJECT_ID_HERE/main-container-registry/cloud-hello-world:latest
+            imagePullPolicy: IfNotPresent
+            command: ["python", "main.py"]
+            resources:
+              limits:
+                memory: "1Gi"
+                cpu: "250m"
+          restartPolicy: OnFailure
