@@ -6,14 +6,19 @@ spec:
   schedule: "*/1 * * * *"
   jobTemplate:
     spec:
-      parallelism: 4
+      parallelism: 1
       template:
         spec:
           containers:
           - name: hello-job-container
-            image: your-hello-cloud-container-image-here-(or-actually-any-image)
-            imagePullPolicy: Always
+            image: ${{GOOGLE_CLOUD_REGION}}-docker.pkg.dev/${{GOOGLE_CLOUD_PROJECT}}/main-container-registry/cloud-hello-world:latest
+            imagePullPolicy: IfNotPresent
             command: ["python", "main.py"]
+            env: 
+            - name: GOOGLE_CLOUD_PROJECT
+              value: ${{GOOGLE_CLOUD_PROJECT}}
+            - name: GOOGLE_CLOUD_REGION
+              value: ${{GOOGLE_CLOUD_REGION}}
             resources:
               limits:
                 memory: "1Gi"

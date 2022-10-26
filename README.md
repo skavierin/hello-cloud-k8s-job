@@ -1,0 +1,1 @@
+To produce the actual job yaml first setup `GOOGLE_CLOUD_REGION` and `GOOGLE_CLOUD_PROJECT` env vars on your machine, then launch `render.py`
