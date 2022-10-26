@@ -12,7 +12,7 @@ spec:
           containers:
           - name: hello-job-container
             image: ${{GOOGLE_CLOUD_REGION}}-docker.pkg.dev/${{GOOGLE_CLOUD_PROJECT}}/main-container-registry/cloud-hello-world:latest
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             command: ["python", "main.py"]
             env: 
             - name: GOOGLE_CLOUD_PROJECT
